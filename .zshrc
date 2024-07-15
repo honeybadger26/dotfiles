@@ -38,12 +38,12 @@ bindkey -M menuselect '^M' .accept-line
 # Use Shift+Tab to move through completion backwards
 bindkey '^[[Z' reverse-menu-complete
 
-# Fuzzy find history backwards by typing + Up arrow
+# Fuzzy find history backwards by typing + Up arrow. Credit to ohmyzsh
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
 
-# Fuzzy find history forwards by typing + Down arrow
+# Fuzzy find history forwards by typing + Down arrow. Credit to ohmyzsh
 autoload -U down-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
@@ -65,6 +65,7 @@ alias grbc='git rebase --continue'
 alias gst='git status'
 alias l='ls -lAh --color=auto'
 
+# Credit to ohmyzsh
 function _git_main_branch() {
   command git rev-parse --git-dir &>/dev/null || return
   local ref
