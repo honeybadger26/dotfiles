@@ -1,3 +1,5 @@
+################################### PLUGINS ###################################
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -12,25 +14,27 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-################################################################################
+################################### OPTIONS ###################################
 
 # Remove right padding in prompt
 ZLE_RPROMPT_INDENT=0
 
-# Set history options
+setopt SHARE_HISTORY
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt SHARE_HISTORY
 
-# Set completion options
 setopt MENU_COMPLETE
 autoload -Uz compinit && compinit
 zmodload -i zsh/complist
 
-# Enable completion meu and case insensitive completion
+# Enable completion meu
 zstyle ':completion:*' menu select
+
+# Enable case insensitive completion
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+################################# KEY BINDINGS #################################
 
 # Press Enter only once to accept current suggestion
 bindkey -M menuselect '^M' .accept-line
@@ -48,22 +52,7 @@ autoload -U down-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 
-################################################################################
-
-alias -g ......='../../../../..'
-alias -g .....='../../../..'
-alias -g ....='../../..'
-alias -g ...='../..'
-
-alias ga='git add'
-alias gaf="git add . && git commit --fixup"
-alias gb='git branch'
-alias gc='git commit'
-alias gco='git checkout'
-alias gfx="git commit --fixup"
-alias grbc='git rebase --continue'
-alias gst='git status'
-alias l='ls -lAh --color=auto'
+############################## ALIASES/FUNCTIONS ##############################
 
 # Credit to ohmyzsh
 function _git_main_branch() {
@@ -82,12 +71,25 @@ function _git_main_branch() {
   return 1
 }
 
-function gri() {
-  git rebase --interactive --autosquash $(_git_main_branch)
-}
+alias -g ......='../../../../..'
+alias -g .....='../../../..'
+alias -g ....='../../..'
+alias -g ...='../..'
+
+alias l='ls -lAh --color=auto'
+alias ga='git add'
+alias gb='git branch'
+alias gc='git commit'
+alias gco='git checkout'
+alias gst='git status'
+alias grv='git revert --no-edit'
+alias grbc='git rebase --continue'
+alias gfx='git commit --fixup'
+alias gaf='git add . && git commit --fixup'
+alias gri='git rebase --interactive --autosquash $(_git_main_branch)'
 
 function grw() {
-  main_branch="$(_git_main_branch)"
+  main_branch=$(_git_main_branch)
   git checkout $main_branch
   git pull
   git checkout -
