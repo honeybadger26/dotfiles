@@ -1,8 +1,7 @@
 syntax on
 filetype on
+set mouse=
 set noswapfile
-set number
-set relativenumber
 set expandtab
 set autoindent
 set showmatch
