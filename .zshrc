@@ -54,39 +54,27 @@ bindkey "^[[B" down-line-or-beginning-search
 
 ############################## ALIASES/FUNCTIONS ##############################
 
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+
+alias l='ls -lAh --color=auto'
+
 # Credit to ohmyzsh
 function _git_main_branch() {
   command git rev-parse --git-dir &>/dev/null || return
   local ref
-
   for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk,mainline,default,stable,master}; do
     if command git show-ref -q --verify $ref; then
       echo ${ref:t}
       return 0
     fi
   done
-
   # If no main branch was found, fall back to master but return error
   echo master
   return 1
 }
-
-alias -g ......='../../../../..'
-alias -g .....='../../../..'
-alias -g ....='../../..'
-alias -g ...='../..'
-
-alias l='ls -lAh --color=auto'
-alias ga='git add'
-alias gb='git branch'
-alias gc='git commit'
-alias gco='git checkout'
-alias gst='git status'
-alias grv='git revert --no-edit'
-alias grbc='git rebase --continue'
-alias gfx='git commit --fixup'
-alias gaf='git add . && git commit --fixup'
-alias gri='git rebase --interactive --autosquash $(_git_main_branch)'
 
 function grw() {
   main_branch=$(_git_main_branch)
@@ -95,3 +83,11 @@ function grw() {
   git checkout -
   git rebase $main_branch
 }
+
+alias gb='git branch'
+alias gc='git checkout'
+alias gf='git commit --fixup'
+alias gaf='git add . && git commit --fixup'
+alias gri='git rebase --interactive --autosquash $(_git_main_branch)'
+alias grc='git rebase --continue'
+alias gst='git status'
