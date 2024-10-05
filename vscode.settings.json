@@ -1,0 +1,49 @@
+{
+    "diffEditor.hideUnchangedRegions.enabled": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.maxComputationTime": 0,
+    "diffEditor.renderSideBySide": true,
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.formatOnSave": true,
+    "editor.indentSize": "tabSize",
+    "editor.minimap.enabled": false,
+    "editor.rulers": [
+        80
+    ],
+    "editor.stickyScroll.enabled": false,
+    "editor.tabCompletion": "on",
+    "editor.tabSize": 2,
+    "editor.wordBasedSuggestions": "allDocuments",
+    "files.insertFinalNewline": true,
+    "files.simpleDialog.enable": true,
+    "files.trimTrailingWhitespace": true,
+    "git.showActionButton": {
+        "commit": false,
+        "publish": false,
+        "sync": false
+    },
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.statusBar.enabled": false,
+    "gitlens.views.commits.files.layout": "list",
+    "gitlens.views.showRelativeDateMarkers": false,
+    "terminal.integrated.fontFamily": "Meslo LG M for Powerline",
+    "terminal.integrated.showExitAlert": false,
+    "typescript.preferences.quoteStyle": "single",
+    "vim.foldfix": true,
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "after": [
+                "p",
+                "g",
+                "v",
+                "y"
+            ],
+            "before": [
+                "p"
+            ]
+        }
+    ],
+    "workbench.colorTheme": "Default Dark+"
+}
