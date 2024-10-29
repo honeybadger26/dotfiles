@@ -3,5 +3,10 @@ filetype on
 set mouse=
 set noswapfile
 set expandtab
+set shiftwidth=2
+set tabstop=2
 set autoindent
+set smartindent
 set showmatch
+set ignorecase
+set smartcase
