@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e -u -o pipefail
 
 # Creates fixup commits for the currently unstaged files from the main branch
 # to the current head.
