@@ -79,16 +79,16 @@ function grw() {
   git rebase $main_branch
 }
 
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g .....='../../../..'
 alias -g ......='../../../../..'
-
-alias gb='git branch'
-alias gst='git status'
-alias gc='git checkout'
-alias gf='git commit --fixup'
+alias -g .....='../../../..'
+alias -g ....='../../..'
+alias -g ...='../..'
 alias gaf='git add . && git commit --fixup'
+alias gb='git branch'
+alias gcb='git checkout -b'
+alias gco='git checkout'
+alias gf='git commit --fixup'
 alias grc='git rebase --continue'
 alias gri='git rebase --interactive --autosquash $(_git_main_branch)'
+alias gst='git status'
 alias l='ls -lAh --color=auto'
