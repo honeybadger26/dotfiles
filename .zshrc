@@ -7,7 +7,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Load zsh plugins
+# Load zsh plugins (Mac)
+# source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+# source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Load zsh plugins (Linux)
 source $HOME/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -19,12 +22,18 @@ source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Remove right padding in prompt
 ZLE_RPROMPT_INDENT=0
 
+# Share command history between all zsh sessions
 setopt SHARE_HISTORY
+
+# Set history file location and size limits
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
+# Automatically insert the first completion match
 setopt MENU_COMPLETE
+
+# Initialize completion system and Load completion list module
 autoload -Uz compinit && compinit
 zmodload -i zsh/complist
 
@@ -58,14 +67,12 @@ bindkey "^[[B" down-line-or-beginning-search
 function _git_main_branch() {
   command git rev-parse --git-dir &>/dev/null || return
   local ref
-
   for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk,mainline,default,stable,master}; do
     if command git show-ref -q --verify $ref; then
       echo ${ref:t}
       return 0
     fi
   done
-
   # If no main branch was found, fall back to master but return error
   echo master
   return 1
@@ -79,10 +86,10 @@ function grw() {
   git rebase $main_branch
 }
 
-alias -g ......='../../../../..'
-alias -g .....='../../../..'
-alias -g ....='../../..'
 alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
 alias gaf='git add . && git commit --fixup'
 alias gb='git branch'
 alias gcb='git checkout -b'
