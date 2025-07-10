@@ -49,5 +49,6 @@
             ]
         }
     ],
+    "window.commandCenter": false,
     "workbench.editor.empty.hint": "hidden"
 }
