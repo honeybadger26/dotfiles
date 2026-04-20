@@ -1,4 +1,4 @@
-################################### PLUGINS ###################################
+################################ POWERLEVEL10K #################################
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -7,38 +7,40 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Load zsh plugins (Mac)
+# Load Powerlevel10k (Mac)
 # source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
-# source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# Load zsh plugins (Linux)
+# Load Powerlevel10k (Linux)
 source $HOME/.zsh/powerlevel10k/powerlevel10k.zsh-theme
-source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+ZLE_RPROMPT_INDENT=0 # Remove right padding in prompt
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+################################### PLUGINS ###################################
+
+# Load zsh plugins (Mac)
+# source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Load zsh plugins (Linux)
+source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 ################################### OPTIONS ###################################
 
-# Remove right padding in prompt
-ZLE_RPROMPT_INDENT=0
-
-# Share command history between all zsh sessions
-setopt SHARE_HISTORY
+setopt SHARE_HISTORY # Share command history between all zsh sessions
+unsetopt EXTENDED_HISTORY # Remove time info from start of history item
 
 # Set history file location and size limits
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-# Automatically insert the first completion match
-setopt MENU_COMPLETE
+setopt MENU_COMPLETE # Automatically insert the first completion match
 
 # Initialize completion system and Load completion list module
 autoload -Uz compinit && compinit
 zmodload -i zsh/complist
 
-# Enable completion meu
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu select # Enable completion menu
 
 # Enable case insensitive completion
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
