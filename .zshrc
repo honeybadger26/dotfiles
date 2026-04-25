@@ -12,10 +12,10 @@ fi
 # Load Powerlevel10k (Linux)
 source $HOME/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 
-ZLE_RPROMPT_INDENT=0 # Remove right padding in prompt
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+ZLE_RPROMPT_INDENT=0 # Remove right padding in prompt
 
 ################################### PLUGINS ###################################
 
@@ -92,6 +92,7 @@ alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
+alias cl='clear && tmux clear-history'
 alias gaf='git add . && git commit --fixup'
 alias gb='git branch'
 alias gcb='git checkout -b'
