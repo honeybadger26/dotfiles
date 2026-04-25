@@ -1,21 +1,39 @@
-#!/bin/sh
+#!/bin/bash
+
 set -e -u -o pipefail
 
 # Rename files to the date that they were created or last modified.
 
-dir="$1"
-nc="\033[0m"
-grey="\033[30m"
-green="\033[32m"
-blue="\033[34m"
-format_str='%Y.%m.%d-%H.%M.%S'
-cd $dir
+cd $1
+readarray -d '' files < <(find . -maxdepth 1 -type f -print0)
+total=${#files[@]}
 
-for filename in *; do
-  datetime=$(exiftool -d $format_str -DateTimeOriginal -S -s "$filename")
-  [ "$datetime" = "" ] && datetime=$(exiftool -d $format_str -CreationDate -S -s "$filename")
-  [ "$datetime" = "" ] && datetime=$(exiftool -d $format_str -CreateDate -S -s "$filename")
-  [ "$datetime" = "" ] && datetime=$(exiftool -d $format_str -FileModifyDate -S -s "$filename")
+if [ "$total" -eq 0 ]; then
+  echo "Error: No files found"
+  exit 1
+fi
+
+FORMAT_STR='%Y.%m.%d-%H.%M.%S'
+GRAY='\033[2m'
+YELLOW='\033[33m'
+BOLD='\033[1m'
+RESET='\033[0m'
+
+echo -e "${YELLOW}WARNING:${RESET} This script will rename all files in ${BOLD}$(pwd)${RESET}"
+read -p "Continue? (y/N): " -n 1 response
+if [[ "$response" != "y" ]]; then
+  exit 1
+fi
+echo ""
+
+for i in "${!files[@]}"; do
+  idx=$((i+1))
+  filename=${files[i]}
+
+  datetime=$(exiftool -d $FORMAT_STR -DateTimeOriginal -S -s "$filename")
+  [ "$datetime" = "" ] && datetime=$(exiftool -d $FORMAT_STR -CreationDate -S -s "$filename")
+  [ "$datetime" = "" ] && datetime=$(exiftool -d $FORMAT_STR -CreateDate -S -s "$filename")
+  [ "$datetime" = "" ] && datetime=$(exiftool -d $FORMAT_STR -FileModifyDate -S -s "$filename")
 
   # This is based off time modified. Less reliable but doesn't require installing exiftool
   # datetime=$(stat -c %y "$f" | sed -e 's/ +1100//g' -e 's/\.000000000//g' -e 's/-/\./g' -e 's/:/\./g' -e 's/ /-/g')
@@ -30,5 +48,5 @@ for filename in *; do
   done
 
   mv "$filename" "$new_filename"
-  echo -e "${filename} ${blue}->${nc} ${green}${new_filename}${nc}"
+  echo -e "(${idx}/${total}) ${GRAY}${filename#./}${RESET} » ${BOLD}${new_filename}${RESET}"
 done
