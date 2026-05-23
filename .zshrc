@@ -15,7 +15,8 @@ source $HOME/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-ZLE_RPROMPT_INDENT=0 # Remove right padding in prompt
+# Remove right padding in prompt
+ZLE_RPROMPT_INDENT=0
 
 ################################### PLUGINS ###################################
 
@@ -26,21 +27,29 @@ source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ################################### OPTIONS ###################################
 
-setopt SHARE_HISTORY # Share command history between all zsh sessions
-unsetopt EXTENDED_HISTORY # Remove time info from start of history item
+# Share command history between all zsh sessions
+setopt SHARE_HISTORY 
+
+# Remove time info from start of history items
+unsetopt EXTENDED_HISTORY 
 
 # Set history file location and size limits
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=1000
+SAVEHIST=1000
 
-setopt MENU_COMPLETE # Automatically insert the first completion match
+# Set emacs editing mode
+bindkey -e
 
 # Initialize completion system and Load completion list module
 autoload -Uz compinit && compinit
 zmodload -i zsh/complist
 
-zstyle ':completion:*' menu select # Enable completion menu
+# Automatically insert the first completion match
+setopt MENU_COMPLETE
+
+# Enable completion meu
+zstyle ':completion:*' menu select
 
 # Enable case insensitive completion
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
