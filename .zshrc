@@ -66,11 +66,15 @@ bindkey '^[[Z' reverse-menu-complete
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
+# Alternative sequence for Up button. At prompt do Ctrl+v then press up to find out which sequence to use.
+bindkey "^[OA" up-line-or-beginning-search
 
 # Fuzzy find history forwards by typing + Down arrow. Credit to ohmyzsh
 autoload -U down-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
+# Alternative sequence for Down button. At prompt do Ctrl+v then press down to find out which sequence to use.
+bindkey "^[OB" up-line-or-beginning-search
 
 ############################## ALIASES/FUNCTIONS ##############################
 
