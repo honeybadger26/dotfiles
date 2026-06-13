@@ -74,7 +74,7 @@ autoload -U down-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 # Alternative sequence for Down button. At prompt do Ctrl+v then press down to find out which sequence to use.
-bindkey "^[OB" up-line-or-beginning-search
+bindkey "^[OB" down-line-or-beginning-search
 
 ############################## ALIASES/FUNCTIONS ##############################
 
